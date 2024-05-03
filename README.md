@@ -33,7 +33,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Code Review
-        uses: masroorposh10/ai-codereviewer@main
+        uses: masroorposh10/codepilotai@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
@@ -55,8 +55,7 @@ the Azure OpenAI API. It then generates review comments based on the AI's respon
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit issues or pull requests to improve the AI Code Reviewer GitHub
-Action.
+Contributions are welcome! Please feel free to submit issues or pull requests to improve.
 
 Let the maintainer generate the final package (`yarn build` & `yarn package`).
 
