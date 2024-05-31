@@ -152,7 +152,7 @@ function getAIResponse(prompt) {
                     content: prompt,
                 },
             ], queryConfig);
-            const res = ((_b = (_a = response.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.reviews.trim()) || "{}";
+            const res = ((_b = (_a = response.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.reviews) || "{}";
             // Ensure that the content is correctly formatted and parsed as JSON
             console.log(res);
             // Extract and return the reviews
