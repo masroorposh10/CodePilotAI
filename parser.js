@@ -24,7 +24,7 @@ let response = {
   let content = String(response.content);
   
   // Use a regular expression to capture the content between ```json and ```
-  let match = content.match(/```json\n([\s\S]*?)\n```/);
+  let match = content.r(/```json\n([\s\S]*?)\n```/);
   
   if (match && match[1]) {
     let jsonContent = match[1];
