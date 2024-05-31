@@ -93,9 +93,8 @@ function createPrompt(file: File, chunk: Chunk, prDetails: PRDetails): string {
 - Use the given description only for the overall context and only comment the code.
 - IMPORTANT: NEVER suggest adding comments to the code.
 
-Review the following code diff in the file "${
-    file.to
-  }" and take the pull request title and description into account when writing the response.
+Review the following code diff in the file "${file.to
+    }" and take the pull request title and description into account when writing the response.
   
 Pull request title: ${prDetails.title}
 Pull request description:
@@ -109,9 +108,9 @@ Git diff to review:
 \`\`\`diff
 ${chunk.content}
 ${chunk.changes
-  // @ts-expect-error - ln and ln2 exists where needed
-  .map((c) => `${c.ln ? c.ln : c.ln2} ${c.content}`)
-  .join("\n")}
+      // @ts-expect-error - ln and ln2 exists where needed
+      .map((c) => `${c.ln ? c.ln : c.ln2} ${c.content}`)
+      .join("\n")}
 \`\`\`
 `;
 }
@@ -143,10 +142,28 @@ async function getAIResponse(prompt: string): Promise<Array<{
     );
 
     const res = response.choices[0].message?.content?.trim() || "{}";
-    let content = response.choices[0];
-    content = content.replace(/```json\n/, '').replace(/```$/, '');
-    let jsonContent = JSON.parse(content);
-    return JSON.parse(jsonContent).reviews;
+    let content = String(response.choices[0]);
+
+    // Use a regular expression to capture the content between ```json and ```
+    let match = content.match(/```json\n([\s\S]*?)\n```/);
+
+    if (match && match[1]) {
+      let jsonContent = match[1];
+
+      try {
+        // Parse the JSON content
+        var parsedContent = JSON.parse(jsonContent);
+
+        // Output the result
+        console.log(parsedContent);
+      } catch (e) {
+        console.error('Failed to parse JSON content:', e);
+      }
+    } else {
+      console.log('No matching content found');
+      return null;
+    }
+    return JSON.parse(parsedContent).reviews;
   } catch (error) {
     console.error("Error:", error);
     return null;
