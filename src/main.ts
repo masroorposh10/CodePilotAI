@@ -143,6 +143,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
     );
 
     const res = response.choices[0].message?.content?.trim() || "{}";
+    res.replace(/```json|```/g, '');
     console.log(res);
     return JSON.parse(res).reviews;
   } catch (error) {
