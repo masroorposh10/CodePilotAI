@@ -126,11 +126,11 @@ async function getAIResponse(prompt: string): Promise<Array<{
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
-    response_format: { "type": "json_object" },
+    response_format: "json",
   };
 
   try {
-    const response = await openai.getCompletions(
+    const response = await openai.getChatCompletions(
       AZURE_OPENAI_API_MODEL,
       [
         {

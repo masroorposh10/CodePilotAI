@@ -143,10 +143,10 @@ function getAIResponse(prompt) {
             top_p: 1,
             frequency_penalty: 0,
             presence_penalty: 0,
-            response_format: { "type": "json_object" },
+            response_format: "json",
         };
         try {
-            const response = yield openai.getCompletions(AZURE_OPENAI_API_MODEL, [
+            const response = yield openai.getChatCompletions(AZURE_OPENAI_API_MODEL, [
                 {
                     role: "system",
                     content: prompt,
