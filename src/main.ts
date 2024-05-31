@@ -141,7 +141,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
       queryConfig
     );
 
-    const res = response.choices[0].message?.content?.reviews.trim() || "{}";
+    const res = response.choices[0].message?.content?.reviews || "{}";
     // Ensure that the content is correctly formatted and parsed as JSON
     console.log(res);
 
