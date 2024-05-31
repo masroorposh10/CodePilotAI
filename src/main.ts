@@ -127,6 +127,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
+    response_format: { type: "json_object" },
   };
 
   try {
@@ -142,8 +143,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
     );
 
     const res = response.choices[0].message?.content?.trim() || "{}";
-    // console.log(res);
-    console.log(JSON.parse(res).reviews);
+    console.log(res);
     return JSON.parse(res).reviews;
   } catch (error) {
     console.error("Error:", error);
