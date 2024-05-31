@@ -109,7 +109,6 @@ function createPrompt(file, chunk, prDetails) {
 - Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
 - Do not give positive comments or compliments.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
-- Write the comment in GitHub Markdown format.
 - Use the given description only for the overall context and only comment the code.
 - IMPORTANT: NEVER suggest adding comments to the code.
 
@@ -139,7 +138,7 @@ function getAIResponse(prompt) {
         const queryConfig = {
             model: AZURE_OPENAI_API_MODEL,
             temperature: 0.2,
-            max_tokens: 4096,
+            max_tokens: 700,
             top_p: 1,
             frequency_penalty: 0,
             presence_penalty: 0,
