@@ -122,7 +122,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
   const queryConfig = {
     model: AZURE_OPENAI_API_MODEL,
     temperature: 0.2,
-    max_tokens: 700,
+    max_tokens: 4096,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
@@ -141,12 +141,8 @@ async function getAIResponse(prompt: string): Promise<Array<{
       queryConfig
     );
 
-    const res = response.choices[0].message?.content?.reviews || "{}";
-    // Ensure that the content is correctly formatted and parsed as JSON
-    console.log(res);
-
-    // Extract and return the reviews
-    return res || [];
+    const res = response.choices[0].message?.content?.trim() || "{}";
+    return JSON.parse(res).reviews;
   } catch (error) {
     console.error("Error:", error);
     return null;
