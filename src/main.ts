@@ -126,7 +126,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
-    response_format: { type: "json_object" },
+    response_format: { "type": "json_object" },
   };
 
   try {
@@ -142,28 +142,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
     );
 
     const res = response.choices[0].message?.content?.trim() || "{}";
-    let content = String(response.choices[0]);
-
-    // Use a regular expression to capture the content between ```json and ```
-    let match = content.match(/```json\n([\s\S]*?)\n```/);
-
-    if (match && match[1]) {
-      let jsonContent = match[1];
-
-      try {
-        // Parse the JSON content
-        var parsedContent = JSON.parse(jsonContent);
-
-        // Output the result
-        console.log(parsedContent);
-      } catch (e) {
-        console.error('Failed to parse JSON content:', e);
-      }
-    } else {
-      console.log('No matching content found');
-      return null;
-    }
-    return JSON.parse(parsedContent).reviews;
+    return JSON.parse(res);
   } catch (error) {
     console.error("Error:", error);
     return null;
