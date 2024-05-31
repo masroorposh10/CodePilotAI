@@ -153,8 +153,8 @@ function getAIResponse(prompt) {
                 },
             ], queryConfig);
             const res = ((_b = (_a = response.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.trim()) || "{}";
-            console.log(res);
-            // console.log(JSON.parse(res).reviews);
+            // console.log(res);
+            console.log(JSON.parse(res).reviews);
             return JSON.parse(res).reviews;
         }
         catch (error) {
