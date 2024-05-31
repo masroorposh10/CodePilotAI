@@ -53,9 +53,6 @@ const AZURE_OPENAI_API_MODEL = core.getInput("AZURE_OPENAI_API_MODEL");
 const AZURE_OPENAI_API_ENDPOINT = core.getInput("AZURE_OPENAI_API_ENDPOINT");
 const octokit = new rest_1.Octokit({ auth: GITHUB_TOKEN });
 const { OpenAIClient, AzureKeyCredential } = __nccwpck_require__(8946);
-console.log(AZURE_OPENAI_API_ENDPOINT + "endpoint");
-console.log(AZURE_OPENAI_API_KEY + "key");
-console.log(AZURE_OPENAI_API_MODEL + " model");
 const openai = new OpenAIClient(AZURE_OPENAI_API_ENDPOINT, new AzureKeyCredential(AZURE_OPENAI_API_KEY));
 function getPRDetails() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -156,6 +153,8 @@ function getAIResponse(prompt) {
                 },
             ], queryConfig);
             const res = ((_b = (_a = response.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.trim()) || "{}";
+            console.log(res);
+            console.log(JSON.parse(res).reviews);
             return JSON.parse(res).reviews;
         }
         catch (error) {
