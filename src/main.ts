@@ -130,7 +130,7 @@ async function getAIResponse(prompt: string): Promise<Array<{
   };
 
   try {
-    const response = await openai.getChatCompletions(
+    const response = await openai.getCompletions(
       AZURE_OPENAI_API_MODEL,
       [
         {
