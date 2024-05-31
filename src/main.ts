@@ -143,11 +143,10 @@ async function getAIResponse(prompt: string): Promise<Array<{
     );
 
     const res = response.choices[0].message?.content?.trim() || "{}";
-    res.replace(/```json|```/g, '');
-    console.log(response.choices[0])
-    console.log(response.choices[0].message)
-    console.log(response.choices[0].message?.content?.trim());
-    return JSON.parse(res).reviews;
+    let content = response.choices[0];
+    content = content.replace(/```json\n/, '').replace(/```$/, '');
+    let jsonContent = JSON.parse(content);
+    return JSON.parse(jsonContent).reviews;
   } catch (error) {
     console.error("Error:", error);
     return null;
